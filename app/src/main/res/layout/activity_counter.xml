@@ -3,22 +3,113 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <Button 
-         android:id="@+id/btnStart"
-          android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         android:text="Start11" />
-    
-     <Button 
-         android:id="@+id/btnStop"
-          android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-         android:text="Stop" />
-    <TextView
-        android:id="@+id/textViewTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="25sp"
-        />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Training"
+            android:id="@+id/textView3" />
+
+        <SeekBar
+            android:layout_width="268dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBarTraining"
+            android:max="60" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textViewTraining"
+            android:layout_weight="0.49" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        android:weightSum="1">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pause"
+            android:id="@+id/textView4" />
+
+        <SeekBar
+            android:layout_width="279dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/seekBarPause" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textViewPause"
+            android:layout_weight="0.54" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="61dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Series"
+            android:id="@+id/textView5" />
+
+        <EditText
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextSeries" />
+
+        <Button
+             android:id="@+id/btnStart"
+              android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="Start" />
+
+        <Button
+             android:id="@+id/btnStop"
+              android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+             android:text="Stop" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="109dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/textViewSeriesTime" />
+
+        <TextView
+            android:id="@+id/textViewTotalTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50sp"
+            android:textColor="@color/accent_material_dark" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textViewPauseTime"
+            android:textColor="@android:color/holo_green_dark" />
+    </LinearLayout>
 
 </LinearLayout>
