@@ -3,12 +3,14 @@ package com.example.main;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -38,7 +40,14 @@ public class CounterActivity extends Activity {
     CounterClass timer;
     int totalTrainingTime, seriesTime, pauseTime, seriesCounter, roundCounter;
     TextToSpeech t1;
-    boolean switcher = true;
+    boolean switcherTrainingPause = false;
+    boolean playFiveSeconds = true;
+    Vibrator vibrator;
+    private String five="five";
+    private String stop= "stop";
+    private String finish = "Done";
+    private String start = "start";
+
 
 
     @Override
@@ -58,6 +67,8 @@ public class CounterActivity extends Activity {
         seekBarTraining = (SeekBar) findViewById(R.id.seekBarTraining);
         seekBarPause = (SeekBar) findViewById(R.id.seekBarPause);
         editTextSeries = (EditText) findViewById(R.id.editTextSeries);
+        Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
 
         btnStart.setOnClickListener(new OnClickListener() {
 
@@ -161,29 +172,35 @@ public class CounterActivity extends Activity {
 
 
         public CounterClass(long secondsInFuture, long countDownInterval) {
-            super(secondsInFuture * 1000, countDownInterval * 1000);
+            super(secondsInFuture * 1000, (countDownInterval * 1000)-100);
         }
 
 
         @Override
         public void onFinish() {
             Log.i("onFinish ","finish");
+//            t1.speak(String.valueOf(roundCounter), TextToSpeech.QUEUE_FLUSH, null);
+            playFiveSeconds=true;
+//          vibrator.vibrate(500);
             if (roundCounter > 0) {
-                if (switcher) {
+                if (switcherTrainingPause) {
                     timer = new CounterClass(seriesTime, 1);
+                    t1.speak(start,  TextToSpeech.QUEUE_FLUSH, null);
                     Log.i("seriesTime ", String.valueOf(seriesTime));
-                    switcher = !switcher;
+                    switcherTrainingPause = !switcherTrainingPause;
                     timer.start();
                 } else {
                     timer = new CounterClass(pauseTime, 1);
+                    t1.speak(stop,  TextToSpeech.QUEUE_FLUSH, null);
                     Log.i("pauseTime ", String.valueOf(pauseTime));
-                    switcher = !switcher;
+                    switcherTrainingPause = !switcherTrainingPause;
                     timer.start();
                 }
                 roundCounter--;
             }
             if (roundCounter == 0) {
                 textViewTotalTime.setText("Completed.");
+                t1.speak(finish, TextToSpeech.QUEUE_FLUSH, null);
             }
 
         }
@@ -198,6 +215,12 @@ public class CounterActivity extends Activity {
                     TimeUnit.MILLISECONDS.toSeconds(milis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(milis)));
             Log.i("hmsTotal ", hmsTotal);
             textViewTotalTime.setText(hmsTotal);
+
+            if (milis < 5000 && playFiveSeconds){
+                playFiveSeconds = false;
+                t1.speak(five, TextToSpeech.QUEUE_FLUSH, null);
+            }
+
         }
 
 
