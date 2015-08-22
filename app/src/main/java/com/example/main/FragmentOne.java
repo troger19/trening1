@@ -27,7 +27,7 @@ import com.jano.trening.R;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-public class FragmentOne extends Fragment {
+public class FragmentOne extends Fragment implements TextToSpeech.OnInitListener {
 
     public static final String IMAGE_RESOURCE_ID = "iconResourceID";
     public static final String ITEM_NAME = "itemName";
@@ -43,12 +43,12 @@ public class FragmentOne extends Fragment {
     String soundTick = "tick";
     CounterClass timer;
     int totalTrainingTime, seriesTime, pauseTime, seriesCounter, roundCounter;
-    TextToSpeech t1;
+    TextToSpeech textToSpeech;
     boolean switcherTrainingPause = false;
     boolean playFiveSeconds = true;
     Vibrator vibrator;
-    private String five="five";
-    private String stop= "stop";
+    private String five = "five";
+    private String stop = "stop";
     private String finish = "Done";
     private String start = "start";
 
@@ -60,8 +60,8 @@ public class FragmentOne extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.activity_counter, container,false);
-
+        View view = inflater.inflate(R.layout.activity_counter, container, false);
+        textToSpeech = new TextToSpeech(getActivity(), this);
 
         btnStart = (Button) view.findViewById(R.id.btnStart);
         btnStop = (Button) view.findViewById(R.id.btnStop);
@@ -76,7 +76,6 @@ public class FragmentOne extends Fragment {
         seekBarPause = (SeekBar) view.findViewById(R.id.seekBarPause);
         editTextSeries = (EditText) view.findViewById(R.id.editTextSeries);
         Vibrator vibrator = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-
 
 
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -147,24 +146,8 @@ public class FragmentOne extends Fragment {
 
             }
         });
-
-        t1 = new TextToSpeech(getActivity(), new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
-                if (status != TextToSpeech.ERROR) {
-                    t1.setLanguage(Locale.UK);
-                }
-            }
-        });
-
-
-
-
-
-
         return view;
     }
-
 
 
     protected void managerOfSound(String theText) {
@@ -181,32 +164,52 @@ public class FragmentOne extends Fragment {
         mediaPlayer.start();
     }
 
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = textToSpeech.setLanguage(Locale.US);
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "Language is not supported");
+            } else {
 
+            }
+        } else {
+            Log.e("TTS", "Initilization Failed");
+        }
+    }
+
+    @Override
+    public void onPause() {
+        if (textToSpeech != null) {
+            textToSpeech.stop();
+            textToSpeech.shutdown();
+        }
+        super.onPause();
+    }
 
     public class CounterClass extends CountDownTimer {
 
 
         public CounterClass(long secondsInFuture, long countDownInterval) {
-            super(secondsInFuture * 1000, (countDownInterval * 1000)-100);
+            super(secondsInFuture * 1000, (countDownInterval * 1000) - 100);
         }
 
 
         @Override
         public void onFinish() {
             Log.i("onFinish ", "finish");
-//            t1.speak(String.valueOf(roundCounter), TextToSpeech.QUEUE_FLUSH, null);
-            playFiveSeconds=true;
-//          vibrator.vibrate(500);
+            playFiveSeconds = true;
             if (roundCounter > 0) {
                 if (switcherTrainingPause) {
                     timer = new CounterClass(seriesTime, 1);
-                    t1.speak(start,  TextToSpeech.QUEUE_FLUSH, null);
+                    textToSpeech.speak(start, TextToSpeech.QUEUE_FLUSH, null);
                     Log.i("seriesTime ", String.valueOf(seriesTime));
                     switcherTrainingPause = !switcherTrainingPause;
                     timer.start();
                 } else {
                     timer = new CounterClass(pauseTime, 1);
-                    t1.speak(stop,  TextToSpeech.QUEUE_FLUSH, null);
+                    textToSpeech.speak(stop, TextToSpeech.QUEUE_FLUSH, null);
                     Log.i("pauseTime ", String.valueOf(pauseTime));
                     switcherTrainingPause = !switcherTrainingPause;
                     timer.start();
@@ -215,7 +218,7 @@ public class FragmentOne extends Fragment {
             }
             if (roundCounter == 0) {
                 textViewTotalTime.setText("Completed.");
-                t1.speak(finish, TextToSpeech.QUEUE_FLUSH, null);
+                textToSpeech.speak(finish, TextToSpeech.QUEUE_FLUSH, null);
             }
 
         }
@@ -231,9 +234,9 @@ public class FragmentOne extends Fragment {
             Log.i("hmsTotal ", hmsTotal);
             textViewTotalTime.setText(hmsTotal);
 
-            if (milis < 5000 && playFiveSeconds){
+            if (milis < 6000 && playFiveSeconds) {
                 playFiveSeconds = false;
-                t1.speak(five, TextToSpeech.QUEUE_FLUSH, null);
+                textToSpeech.speak(five, TextToSpeech.QUEUE_FLUSH, null);
             }
 
         }

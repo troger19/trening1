@@ -10,4 +10,21 @@
     <string name="drawer_close">Close drawer</string>
     <string name="title_activity_training_configuration">TrainingConfigurationActivity</string>
 
+    <string-array name="trainings_array">
+        <item>Training1</item>
+        <item>Training2</item>
+        <item>Training3</item>
+        <item>Training4</item>
+        <item>Training5</item>
+        <item>Training6</item>
+    </string-array>
+
+    <string name="training_type">trainingType</string>
+    <string name="training_time">trainingTime</string>
+    <string name="pause_time">pauseTime</string>
+    <string name="series">series</string>
+    <string name="shared_pref_file">trainingFile</string>
+
+
+
 </resources>

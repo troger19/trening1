@@ -7,32 +7,32 @@ package com.example.main;
 
 import android.app.ListFragment;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.jano.trening.TrainingConfigurationActivity;
+import com.jano.trening.R;
 
-public class MyListFragment extends ListFragment {
+public class TrainingList extends ListFragment {
 
-    public final static String TRAINING_TYPE = "training_type";
+    private Resources res;
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-                "Linux", "OS/2" };
+        res = getResources();
+        String[] trainings = res.getStringArray(R.array.trainings_array);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                android.R.layout.simple_list_item_1, values);
+                android.R.layout.simple_list_item_1, trainings);
         setListAdapter(adapter);
     }
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-
-        Intent intent = new Intent(getActivity(), TrainingConfigurationActivity.class);
-        intent.putExtra(TRAINING_TYPE,getListAdapter().getItem(position).toString());
+        Intent intent = new Intent(getActivity(), CounterActivity.class);
+        intent.putExtra(getString(R.string.training_type),getListAdapter().getItem(position).toString());
         startActivity(intent);
 
     }

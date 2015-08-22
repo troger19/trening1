@@ -19,7 +19,7 @@
             android:layout_width="268dp"
             android:layout_height="wrap_content"
             android:id="@+id/seekBarTraining"
-            android:max="60" />
+            android:max="120" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +45,8 @@
         <SeekBar
             android:layout_width="279dp"
             android:layout_height="wrap_content"
-            android:id="@+id/seekBarPause" />
+            android:id="@+id/seekBarPause"
+            android:max="60" />
 
         <TextView
             android:layout_width="wrap_content"
