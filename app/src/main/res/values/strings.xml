@@ -19,6 +19,19 @@
         <item>Training6</item>
     </string-array>
 
+    <string name="country_prompt">Choose an exercise</string>
+
+    <string-array name="exercises_arrays">
+        <item>Regular Push Ups</item>
+        <item>Nauzko</item>
+        <item>Spidermanacke</item>
+        <item>Na prstoch</item>
+        <item>S vyskokom</item>
+        <item>Superpomale</item>
+        <item>Asymetricke</item>
+    </string-array>
+
+
     <string name="training_type">trainingType</string>
     <string name="training_time">trainingTime</string>
     <string name="pause_time">pauseTime</string>
