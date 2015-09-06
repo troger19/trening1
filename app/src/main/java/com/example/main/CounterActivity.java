@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -19,11 +20,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.jano.trening.R;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -33,14 +37,14 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
 
     private Button btnStart, btnStop;
     private SeekBar seekBarTraining, seekBarPause;
-    private TextView textViewTotalTime, textViewTraining, textViewPause, textViewSeriesTime, textViewPauseTime;
+    private TextView textViewTotalTime, textViewTraining, textViewPause, textExercise;
     EditText editTextSeries;
     private SoundPool sounds;
     private int sndtick;
     MediaPlayer mediaPlayer = null;
     String soundTick = "tick";
     CounterClass timer;
-    int totalTrainingTime, seriesTime, pauseTime, seriesCounter, roundCounter;
+    int totalTrainingTime, seriesTime, pauseTime, series, roundCounter;
     TextToSpeech textToSpeech;
     boolean switcherTrainingPause = false;
     boolean playFiveSeconds = true;
@@ -51,6 +55,11 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
     private String start = "start";
    private SharedPreferences sharedPref;
     private String trainingType;
+    private TinyDB tinyDB;
+    List<String> exercisesList = new ArrayList<>();
+    private  int exerciseCounter = 0;
+    private ImageView imageExercise;
+
 
 
     @Override
@@ -60,14 +69,18 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
         textToSpeech = new TextToSpeech(this, this);
         sharedPref = getSharedPreferences(getString(R.string.shared_pref_file), 0);
 
+
         Intent intent = getIntent();
         trainingType = intent.getStringExtra(getString(R.string.training_type));
+
+        tinyDB = new TinyDB(this);
+        exercisesList = tinyDB.getListString(trainingType);
+
 
         btnStart = (Button) findViewById(R.id.btnStart);
         btnStop = (Button) findViewById(R.id.btnStop);
         textViewTotalTime = (TextView) findViewById(R.id.textViewTotalTime);
-        textViewSeriesTime = (TextView) findViewById(R.id.textViewSeriesTime);
-        textViewPauseTime = (TextView) findViewById(R.id.textViewPauseTime);
+        textExercise = (TextView) findViewById(R.id.textExercise);
         textViewTraining = (TextView) findViewById(R.id.textViewTraining);
         textViewPause = (TextView) findViewById(R.id.textViewPause);
         sounds = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
@@ -76,6 +89,7 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
         seekBarPause = (SeekBar) findViewById(R.id.seekBarPause);
         editTextSeries = (EditText) findViewById(R.id.editTextSeries);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        imageExercise = (ImageView) findViewById(R.id.imageExercise);
 
         // load saved values into the boxes
         loadValues();
@@ -86,14 +100,13 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
             public void onClick(View v) {
                 //total training time = (Training + pause) * series
                 totalTrainingTime = (Integer.parseInt(textViewTraining.getText().toString()) + Integer.parseInt(textViewPause.getText().toString()))
-                        * Integer.parseInt(editTextSeries.getText().toString());
+                        * Integer.parseInt(editTextSeries.getText().toString()) * exercisesList.size() ;
                 seriesTime = Integer.parseInt(textViewTraining.getText().toString());
                 pauseTime = Integer.parseInt(textViewPause.getText().toString());
                 textViewTotalTime.setText(textViewTraining.getText());
-                textViewSeriesTime.setText(String.valueOf(seekBarTraining.getProgress()));
                 textViewPause.setText(String.valueOf(seekBarPause.getProgress()));
-                seriesCounter = Integer.parseInt(editTextSeries.getText().toString());
-                roundCounter = seriesCounter * 2;
+                series = Integer.parseInt(editTextSeries.getText().toString());
+                roundCounter = series * 2 * exercisesList.size();
 
                 if (timer != null) {
                     timer.cancel();
@@ -197,14 +210,26 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
     /**
      * load values from Shared preferences, set seekbar and TextViews
      */
+
     private void loadValues() {
-        String seriesTime = sharedPref.getString(trainingType + getString(R.string.training_time), "30");
-        String pauseTime = sharedPref.getString(trainingType + getString(R.string.pause_time), "15");
+//        String seriesTime = sharedPref.getString(trainingType + getString(R.string.training_time), "30");
+//        String pauseTime = sharedPref.getString(trainingType + getString(R.string.pause_time), "15");
+        String seriesTime =tinyDB.getString(trainingType + getString(R.string.training_time));
+        String pauseTime = tinyDB.getString(trainingType + getString(R.string.pause_time));
         seekBarTraining.setProgress(Integer.valueOf(seriesTime));
         seekBarPause.setProgress(Integer.valueOf(pauseTime));
         textViewTraining.setText(seriesTime);
         textViewPause.setText(pauseTime);
-        editTextSeries.setText(sharedPref.getString(trainingType + getString(R.string.series), "10"));
+//        editTextSeries.setText(sharedPref.getString(trainingType + getString(R.string.series), "3"));
+        editTextSeries.setText(tinyDB.getString(trainingType + getString(R.string.series)));
+//            editTextSeries.setText(exercisesList.get(2));
+        textExercise.setText(exercisesList.get(0));
+//        int resId = getResources().getIdentifier(exercisesList.get(0), "drawable", getPackageName());
+//        imageExercise.setImageResource(resId);
+        int imageResource = getResources().getIdentifier("@drawable/"+exercisesList.get(0) , null, getPackageName());
+        Drawable res = getResources().getDrawable(imageResource);
+        imageExercise.setImageDrawable(res);
+
     }
 
 
@@ -224,6 +249,7 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
         public void onFinish() {
             Log.i("onFinish ","finish");
             playFiveSeconds=true;
+
             if (roundCounter > 0) {
                 if (switcherTrainingPause) {
                     timer = new CounterClass(seriesTime, 1);
@@ -239,6 +265,16 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                     timer.start();
                 }
                 roundCounter--;
+                if (roundCounter % (series*2) ==0){  // Change the Exercise
+                    exerciseCounter++;
+                    textExercise.setText(exercisesList.get(exerciseCounter));  // change text
+//                    int resId = getResources().getIdentifier(exercisesList.get(0), "drawable", getPackageName());  // change image
+//                    imageExercise.setImageResource(resId);
+                    int imageResource = getResources().getIdentifier("@drawable/"+exercisesList.get(exerciseCounter) , null, getPackageName());
+                    Drawable res = getResources().getDrawable(imageResource);
+                    imageExercise.setImageDrawable(res);
+                    // TODO Say name of the Exercises
+                }
             }
             if (roundCounter == 0) {
                 textViewTotalTime.setText("Completed.");

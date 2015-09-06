@@ -22,13 +22,19 @@
     <string name="country_prompt">Choose an exercise</string>
 
     <string-array name="exercises_arrays">
-        <item>Regular Push Ups</item>
-        <item>Nauzko</item>
-        <item>Spidermanacke</item>
-        <item>Na prstoch</item>
-        <item>S vyskokom</item>
-        <item>Superpomale</item>
-        <item>Asymetricke</item>
+        <item>Push-Up</item>
+        <item>push</item>
+        <item>Diamond-Push-Up</item>
+        <item>One-Arm-Ball-Push-Up</item>
+        <item>Wide-Push-Up</item>
+        <item>Side-To-Side-Push-Up</item>
+        <item>Spiderman-Push-Up</item>
+        <item>Elevated-One-Leg-Push-Up</item>
+        <item>Clapping-Push-Up</item>
+        <item>Rotate-Push-Up</item>
+        <item>One-Legged-Knee-Push-Up</item>
+        <item>One-Arm-Knee-Push-Up</item>
+        <item>One-Arm-Push-Up</item>
     </string-array>
 
 
@@ -37,6 +43,9 @@
     <string name="pause_time">pauseTime</string>
     <string name="series">series</string>
     <string name="shared_pref_file">trainingFile</string>
+    <string name="training_text">Training</string>
+    <string name="pause_text">Pause</string>
+    <string name="series_text">Series</string>
 
 
 

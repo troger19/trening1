@@ -66,8 +66,6 @@ public class FragmentOne extends Fragment implements TextToSpeech.OnInitListener
         btnStart = (Button) view.findViewById(R.id.btnStart);
         btnStop = (Button) view.findViewById(R.id.btnStop);
         textViewTotalTime = (TextView) view.findViewById(R.id.textViewTotalTime);
-        textViewSeriesTime = (TextView) view.findViewById(R.id.textViewSeriesTime);
-        textViewPauseTime = (TextView) view.findViewById(R.id.textViewPauseTime);
         textViewTraining = (TextView) view.findViewById(R.id.textViewTraining);
         textViewPause = (TextView) view.findViewById(R.id.textViewPause);
         sounds = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);

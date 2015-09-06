@@ -20,7 +20,7 @@ public class TrainingList extends ListFragment {
     private Resources res;
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
+        public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         res = getResources();
         String[] trainings = res.getStringArray(R.array.trainings_array);

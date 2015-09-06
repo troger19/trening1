@@ -103,24 +103,32 @@
     </LinearLayout>
 
     <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="71dp"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/textExercise"
+        android:layout_gravity="left" />
+
+</LinearLayout>
+
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="71dp"
         android:weightSum="1">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/textViewSeriesTime"
-            android:layout_gravity="left" />
 
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/textViewPauseTime"
-            android:textColor="@color/accent_material_light"
-            android:layout_gravity="right" />
+            android:id="@+id/imageExercise" />
     </LinearLayout>
+
 
 </LinearLayout>

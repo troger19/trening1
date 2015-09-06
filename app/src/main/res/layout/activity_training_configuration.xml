@@ -98,12 +98,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1">
 
-    <Spinner
-        android:id="@+id/spinner1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:entries="@array/exercises_arrays"
-        android:prompt="@string/country_prompt" />
+    <!--<Spinner-->
+        <!--android:id="@+id/spinner1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:entries="@array/exercises_arrays"-->
+        <!--android:prompt="@string/country_prompt" />-->
 
     <Button
         android:id="@+id/button"
@@ -123,12 +123,49 @@
 
 
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:layout_alignParentBottom="true">
+
+
+        <EditText
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTraining"
+            android:hint="@string/training_text" />
+
+        <EditText
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editPause"
+            android:hint="@string/pause_text" />
+
+        <EditText
+            android:layout_width="121dp"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editSeries"
+            android:hint="@string/series_text" />
+
+
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="61dp"
         android:layout_alignParentBottom="true">
 
-    <Button
+        <Button
     android:id="@+id/btnSave"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
