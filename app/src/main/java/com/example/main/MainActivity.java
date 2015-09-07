@@ -14,8 +14,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.jano.trening.R;
-
 import java.util.ArrayList;
 import java.util.List;
 

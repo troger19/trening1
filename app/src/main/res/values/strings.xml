@@ -20,21 +20,23 @@
     </string-array>
 
     <string name="country_prompt">Choose an exercise</string>
+    one_arm.png
+
+
 
     <string-array name="exercises_arrays">
-        <item>Push-Up</item>
-        <item>push</item>
-        <item>Diamond-Push-Up</item>
-        <item>One-Arm-Ball-Push-Up</item>
-        <item>Wide-Push-Up</item>
-        <item>Side-To-Side-Push-Up</item>
-        <item>Spiderman-Push-Up</item>
-        <item>Elevated-One-Leg-Push-Up</item>
-        <item>Clapping-Push-Up</item>
-        <item>Rotate-Push-Up</item>
-        <item>One-Legged-Knee-Push-Up</item>
-        <item>One-Arm-Knee-Push-Up</item>
-        <item>One-Arm-Push-Up</item>
+        <item>push_up</item>
+        <item>diamond_push_up</item>
+        <item>one_arm_ball_push_up</item>
+        <item>wide_push_up</item>
+        <item>side_side_push_up</item>
+        <item>spiderman_push_up</item>
+        <item>elevated_one_legged_push_up</item>
+        <item>clapping_push_up</item>
+        <item>push_up_rotate</item>
+        <item>one_legged_knee_push_up</item>
+        <item>one_arm_knee_push_up</item>
+        <item>one_arm_push_up</item>
     </string-array>
 
 

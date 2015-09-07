@@ -13,8 +13,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.jano.trening.R;
-
 import java.util.List;
 
 public class CustomDrawerAdapter extends ArrayAdapter<DrawerItem> {

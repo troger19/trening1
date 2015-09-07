@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.jano.trening.R;
 
 public class TrainingList extends ListFragment {
 

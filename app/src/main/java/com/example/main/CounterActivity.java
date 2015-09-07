@@ -6,7 +6,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -24,12 +25,11 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.jano.trening.R;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
+
 
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 @SuppressLint("NewApi")
@@ -226,9 +226,12 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
         textExercise.setText(exercisesList.get(0));
 //        int resId = getResources().getIdentifier(exercisesList.get(0), "drawable", getPackageName());
 //        imageExercise.setImageResource(resId);
-        int imageResource = getResources().getIdentifier("@drawable/"+exercisesList.get(0) , null, getPackageName());
-        Drawable res = getResources().getDrawable(imageResource);
-        imageExercise.setImageDrawable(res);
+//        int imageResource = getResources().getIdentifier("@drawable/"+exercisesList.get(0) , null, getPackageName());
+//        Drawable res = getResources().getDrawable(R.drawable.push);
+//        imageExercise.setImageDrawable(res);
+        int imageResource = getResources().getIdentifier("drawable/" + exercisesList.get(0), null, getPackageName());
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageResource);
+        imageExercise.setImageBitmap(bitmap);
 
     }
 
@@ -266,13 +269,11 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                 }
                 roundCounter--;
                 if (roundCounter % (series*2) ==0){  // Change the Exercise
-                    exerciseCounter++;
+                    exerciseCounter =  (exerciseCounter < exercisesList.size()-1) ? exerciseCounter+1 : exerciseCounter; // not overflow the index
                     textExercise.setText(exercisesList.get(exerciseCounter));  // change text
-//                    int resId = getResources().getIdentifier(exercisesList.get(0), "drawable", getPackageName());  // change image
-//                    imageExercise.setImageResource(resId);
-                    int imageResource = getResources().getIdentifier("@drawable/"+exercisesList.get(exerciseCounter) , null, getPackageName());
-                    Drawable res = getResources().getDrawable(imageResource);
-                    imageExercise.setImageDrawable(res);
+                    int imageResource = getResources().getIdentifier("drawable/" + exercisesList.get(exerciseCounter), null, getPackageName());
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageResource);
+                    imageExercise.setImageBitmap(bitmap);
                     // TODO Say name of the Exercises
                 }
             }

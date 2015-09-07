@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -12,8 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-
-import com.jano.trening.R;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -156,20 +156,50 @@ public class TrainingConfigurationActivity extends AppCompatActivity {
                 tinyDB.putString(trainingType + getString(R.string.training_time), editTraining.getText().toString());
                 tinyDB.putString(trainingType + getString(R.string.pause_time), editPause.getText().toString());
                 tinyDB.putString(trainingType + getString(R.string.series), editSeries.getText().toString());
+
+                //check for not empty
+                if(TextUtils.isEmpty(editTraining.getText())) {
+                    editTraining.setError("Put training time");
+                    return;
+                }
+                if(editTraining.getText().toString().startsWith("0")){
+                    editTraining.setError("Training time cannot be 0");
+                    return;
+                }
+
+                if(TextUtils.isEmpty(editPause.getText())) {
+                    editPause.setError("Put pause time");
+                    return;
+                }
+                if(editPause.getText().toString().startsWith("0")){
+                    editPause.setError("Pause time cannot be 0");
+                    return;
+                }
+                if(TextUtils.isEmpty(editSeries.getText())) {
+                    editSeries.setError("Put number of series");
+                    return;
+                }
+                if(editSeries.getText().toString().startsWith("0")) {
+                    editSeries.setError("Number of series cannot be 0");
+                    return;
+                }
+
+                Toast.makeText(TrainingConfigurationActivity.this, "Training Saved", Toast.LENGTH_SHORT).show();
+                TrainingConfigurationActivity.this.finish();
             }
         };
     }
 
-
-    private Spinner createNewSpinner() {
-        final LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-        final Spinner spinner = new Spinner(this);
-        String[] items = res.getStringArray(R.array.exercises_arrays);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
-        spinner.setAdapter(adapter);
-        spinner.setLayoutParams(lparams);
-        return spinner;
-    }
+//
+//    private Spinner createNewSpinner() {
+//        final LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//        final Spinner spinner = new Spinner(this);
+//        String[] items = res.getStringArray(R.array.exercises_arrays);
+//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
+//        spinner.setAdapter(adapter);
+//        spinner.setLayoutParams(lparams);
+//        return spinner;
+//    }
 
     private LinearLayout createNewLinearLayout(){
         LinearLayout linearLayout = new LinearLayout(this);

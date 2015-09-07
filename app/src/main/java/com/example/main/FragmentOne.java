@@ -22,8 +22,6 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.jano.trening.R;
-
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
