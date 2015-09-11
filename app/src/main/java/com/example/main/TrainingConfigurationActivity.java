@@ -1,5 +1,7 @@
 package com.example.main;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -19,75 +21,10 @@ import java.util.ArrayList;
 
 
 public class TrainingConfigurationActivity extends AppCompatActivity {
-/*
-    private EditText trainingTime, pauseTime, series;
-    private Button btnSave, btnCancel;
-    String trainingType;
-    SharedPreferences sharedPref;
-    SharedPreferences.Editor editor;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_training_configuration);
-
-        sharedPref = getSharedPreferences(getString(R.string.shared_pref_file), 0);
-
-        Intent intent = getIntent();
-        trainingType = intent.getStringExtra(getString(R.string.training_type));
-
-        trainingTime = (EditText) findViewById(R.id.trainingTime);
-        pauseTime = (EditText) findViewById(R.id.pauseTime);
-        series = (EditText) findViewById(R.id.series);
-
-        // load saved values into the boxes
-        loadValues();
-
-        btnSave = (Button) findViewById(R.id.btnSave);
-        btnCancel = (Button) findViewById(R.id.btnCancel);
-
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editor = sharedPref.edit();
-                editor.putString(trainingType + getString(R.string.training_time), trainingTime.getText().toString());
-                editor.putString(trainingType + getString(R.string.pause_time), pauseTime.getText().toString());
-                editor.putString(trainingType + getString(R.string.series), series.getText().toString());
-                editor.commit();
-            }
-        });
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_training_configuration, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void loadValues() {
-        trainingTime.setText(sharedPref.getString(trainingType + getString(R.string.training_time), null));
-        pauseTime.setText(sharedPref.getString(trainingType + getString(R.string.pause_time), null));
-        series.setText(sharedPref.getString(trainingType + getString(R.string.series), null));
-    }
-}
-
-*/
 
     private LinearLayout mLayout, firstLayout;
     private Spinner spinner;
-    private Button mButton,btnSave, btnCancel;
+    private Button btnAdd,btnSave, btnCancel;
     private EditText editTraining, editPause,editSeries;
     private Resources res;
     private SharedPreferences sharedPref;
@@ -111,8 +48,8 @@ public class TrainingConfigurationActivity extends AppCompatActivity {
 //        firstLayout = (LinearLayout) findViewById(R.id.linearLayout1);
         firstLayout = (LinearLayout) findViewById(R.id.placeholder);
 //        spinner = (Spinner) findViewById(R.id.spinner1);
-        mButton = (Button) findViewById(R.id.button);
-        mButton.setOnClickListener(onClick());
+        btnAdd = (Button) findViewById(R.id.button);
+        btnAdd.setOnClickListener(onClick());
 
         btnSave = (Button) findViewById(R.id.btnSave);
         btnCancel = (Button) findViewById(R.id.btnCancel);
@@ -129,8 +66,6 @@ public class TrainingConfigurationActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-//                mLayout.addView(createNewSpinner());
-//                mLayout.addView(createNewLinearLayout());
                 firstLayout.addView(createNewLinearLayout());
             }
         };
@@ -143,21 +78,20 @@ public class TrainingConfigurationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int dropDownsCount =  firstLayout.getChildCount();
-//                editor = sharedPref.edit();
-                ArrayList<String> exerciseList = new ArrayList<>();
+                final ArrayList<String> exerciseList = new ArrayList<>();
                 for (int i=0; i<dropDownsCount;i++) {
 //                    editor.putString(trainingType + "_exercise" + i,  firstLayout.getChildAt(i).toString());
                     LinearLayout linearLayout = (LinearLayout) firstLayout.getChildAt(i);
                     Spinner tempSpinner = (Spinner) linearLayout.getChildAt(0);
                     exerciseList.add(tempSpinner.getSelectedItem().toString());
                 }
-//                editor.commit();
-                tinyDB.putListString(trainingType, exerciseList);
-                tinyDB.putString(trainingType + getString(R.string.training_time), editTraining.getText().toString());
-                tinyDB.putString(trainingType + getString(R.string.pause_time), editPause.getText().toString());
-                tinyDB.putString(trainingType + getString(R.string.series), editSeries.getText().toString());
+
 
                 //check for not empty
+                if(exerciseList.size()==0) {
+                    btnAdd.setError("Add some exercise");
+                    return;
+                }
                 if(TextUtils.isEmpty(editTraining.getText())) {
                     editTraining.setError("Put training time");
                     return;
@@ -184,22 +118,34 @@ public class TrainingConfigurationActivity extends AppCompatActivity {
                     return;
                 }
 
-                Toast.makeText(TrainingConfigurationActivity.this, "Training Saved", Toast.LENGTH_SHORT).show();
-                TrainingConfigurationActivity.this.finish();
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(TrainingConfigurationActivity.this);
+                alertDialogBuilder.setTitle("Save Changes?");
+                alertDialogBuilder
+                        .setMessage("Previous training settings would be overwritten")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, save the settings, finish activity and press Back button
+                                tinyDB.putListString(trainingType, exerciseList);
+                                tinyDB.putString(trainingType + getString(R.string.training_time), editTraining.getText().toString());
+                                tinyDB.putString(trainingType + getString(R.string.pause_time), editPause.getText().toString());
+                                tinyDB.putString(trainingType + getString(R.string.series), editSeries.getText().toString());
+
+                                Toast.makeText(TrainingConfigurationActivity.this, "Training Saved", Toast.LENGTH_SHORT).show();
+                                TrainingConfigurationActivity.this.finish();
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
             }
         };
     }
 
-//
-//    private Spinner createNewSpinner() {
-//        final LinearLayout.LayoutParams lparams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-//        final Spinner spinner = new Spinner(this);
-//        String[] items = res.getStringArray(R.array.exercises_arrays);
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, items);
-//        spinner.setAdapter(adapter);
-//        spinner.setLayoutParams(lparams);
-//        return spinner;
-//    }
 
     private LinearLayout createNewLinearLayout(){
         LinearLayout linearLayout = new LinearLayout(this);
@@ -211,10 +157,10 @@ public class TrainingConfigurationActivity extends AppCompatActivity {
         spinner.setLayoutParams(lparams);
         linearLayout.addView(spinner);
 
-        ViewGroup layout = (ViewGroup) mButton.getParent();
+        ViewGroup layout = (ViewGroup) btnAdd.getParent();
         if(null!=layout) //for safety only  as you are doing onClick
-            layout.removeView(mButton);
-        linearLayout.addView(mButton);
+            layout.removeView(btnAdd);
+        linearLayout.addView(btnAdd);
 
         return linearLayout;
 

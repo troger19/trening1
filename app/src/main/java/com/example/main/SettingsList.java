@@ -5,7 +5,9 @@ package com.example.main;
  */
 
 
+import android.app.AlertDialog;
 import android.app.ListFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -30,9 +32,27 @@ public class SettingsList extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Intent intent = new Intent(getActivity(), TrainingConfigurationActivity.class);
+        final Intent intent = new Intent(getActivity(), TrainingConfigurationActivity.class);
         intent.putExtra(getString(R.string.training_type),getListAdapter().getItem(position).toString());
-        startActivity(intent);
 
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+        alertDialogBuilder.setTitle("Start editing?");
+        alertDialogBuilder
+                .setMessage("Previous exercises for this training will be overwritten")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
-}
+};
+
+

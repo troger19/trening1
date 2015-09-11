@@ -49,16 +49,18 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
     boolean switcherTrainingPause = false;
     boolean playFiveSeconds = true;
     Vibrator vibrator;
-    private String five="five";
-    private String stop= "stop";
-    private String finish = "Done";
-    private String start = "start";
+    private static final String five="Five";
+    private  static final String prepare="Prepare";
+    private String stop= "Stop";
+    private String done = "Done";
+    private String start = "Start";
    private SharedPreferences sharedPref;
     private String trainingType;
     private TinyDB tinyDB;
     List<String> exercisesList = new ArrayList<>();
     private  int exerciseCounter = 0;
     private ImageView imageExercise;
+    private String exerciseName;
 
 
 
@@ -91,6 +93,7 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         imageExercise = (ImageView) findViewById(R.id.imageExercise);
 
+
         // load saved values into the boxes
         loadValues();
 
@@ -111,6 +114,25 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                 if (timer != null) {
                     timer.cancel();
                 }
+
+                exerciseName = Util.getNormalExerciseName(exercisesList.get(0));
+                textExercise.setText(exerciseName);
+                int imageResource = getResources().getIdentifier("drawable/" + exercisesList.get(0), null, getPackageName());
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageResource);
+                imageExercise.setImageBitmap(bitmap);
+
+                // START
+                textToSpeech.speak(start, TextToSpeech.QUEUE_FLUSH, null);
+                while (textToSpeech.isSpeaking()){
+                    System.out.println("Do something or nothing while speaking..");
+                }
+                // Say exercise name
+                textToSpeech.speak(exerciseName, TextToSpeech.QUEUE_FLUSH, null);
+                while (textToSpeech.isSpeaking()){
+                    System.out.println("Do something or nothing while speaking..");
+                }
+
+                //start countdown
                 timer = new CounterClass(seriesTime, 1);
                 timer.start();
                 managerOfSound(soundTick);
@@ -212,26 +234,13 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
      */
 
     private void loadValues() {
-//        String seriesTime = sharedPref.getString(trainingType + getString(R.string.training_time), "30");
-//        String pauseTime = sharedPref.getString(trainingType + getString(R.string.pause_time), "15");
         String seriesTime =tinyDB.getString(trainingType + getString(R.string.training_time));
         String pauseTime = tinyDB.getString(trainingType + getString(R.string.pause_time));
         seekBarTraining.setProgress(Integer.valueOf(seriesTime));
         seekBarPause.setProgress(Integer.valueOf(pauseTime));
         textViewTraining.setText(seriesTime);
         textViewPause.setText(pauseTime);
-//        editTextSeries.setText(sharedPref.getString(trainingType + getString(R.string.series), "3"));
         editTextSeries.setText(tinyDB.getString(trainingType + getString(R.string.series)));
-//            editTextSeries.setText(exercisesList.get(2));
-        textExercise.setText(exercisesList.get(0));
-//        int resId = getResources().getIdentifier(exercisesList.get(0), "drawable", getPackageName());
-//        imageExercise.setImageResource(resId);
-//        int imageResource = getResources().getIdentifier("@drawable/"+exercisesList.get(0) , null, getPackageName());
-//        Drawable res = getResources().getDrawable(R.drawable.push);
-//        imageExercise.setImageDrawable(res);
-        int imageResource = getResources().getIdentifier("drawable/" + exercisesList.get(0), null, getPackageName());
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageResource);
-        imageExercise.setImageBitmap(bitmap);
 
     }
 
@@ -251,7 +260,16 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
         @Override
         public void onFinish() {
             Log.i("onFinish ","finish");
+            Log.i("roundCounter ",Integer.toString(roundCounter));
             playFiveSeconds=true;
+
+
+            if (roundCounter == 2) {
+                textViewTotalTime.setText("Completed.");
+                textToSpeech.speak(done, TextToSpeech.QUEUE_FLUSH, null);
+                timer.cancel();
+                return;
+            }
 
             if (roundCounter > 0) {
                 if (switcherTrainingPause) {
@@ -270,17 +288,22 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                 roundCounter--;
                 if (roundCounter % (series*2) ==0){  // Change the Exercise
                     exerciseCounter =  (exerciseCounter < exercisesList.size()-1) ? exerciseCounter+1 : exerciseCounter; // not overflow the index
-                    textExercise.setText(exercisesList.get(exerciseCounter));  // change text
+                    exerciseName = Util.getNormalExerciseName(exercisesList.get(exerciseCounter));
+                    textExercise.setText(exerciseName);  // change text
                     int imageResource = getResources().getIdentifier("drawable/" + exercisesList.get(exerciseCounter), null, getPackageName());
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageResource);
                     imageExercise.setImageBitmap(bitmap);
-                    // TODO Say name of the Exercises
+                    textToSpeech.speak(exerciseName, TextToSpeech.QUEUE_FLUSH, null);
+                    while (textToSpeech.isSpeaking()){
+                        System.out.println("Do something or nothing while speaking..");
+                    }
                 }
             }
-            if (roundCounter == 0) {
-                textViewTotalTime.setText("Completed.");
-                textToSpeech.speak(finish, TextToSpeech.QUEUE_FLUSH, null);
-            }
+//            if (roundCounter == 0) {
+//                textViewTotalTime.setText("Completed.");
+//                textToSpeech.speak(done, TextToSpeech.QUEUE_FLUSH, null);
+//                timer.cancel();
+//            }
         }
 
         @Override
@@ -296,7 +319,12 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
 
             if (milis < 6000 && playFiveSeconds){
                 playFiveSeconds = false;
-                textToSpeech.speak(five, TextToSpeech.QUEUE_FLUSH, null);
+                if (!switcherTrainingPause){
+                    textToSpeech.speak(five, TextToSpeech.QUEUE_FLUSH, null);
+                }else{
+                    textToSpeech.speak(prepare, TextToSpeech.QUEUE_FLUSH, null);
+                }
+
             }
         }
     }
