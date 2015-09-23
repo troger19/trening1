@@ -45,9 +45,10 @@ public class MainActivity extends ActionBarActivity {
 				GravityCompat.START);
 
 		// Add Drawer Item to dataList
-		dataList.add(new DrawerItem("Training", R.drawable.ic_action_email));
-		dataList.add(new DrawerItem("Settings", R.drawable.ic_action_good));
-		dataList.add(new DrawerItem("Help", R.drawable.ic_action_gamepad));
+		dataList.add(new DrawerItem(getString(R.string.menu_item1), R.drawable.ic_action_email));
+		dataList.add(new DrawerItem(getString(R.string.menu_item2), R.drawable.ic_action_good));
+		dataList.add(new DrawerItem(getString(R.string.menu_item3), R.drawable.ic_action_gamepad));
+		dataList.add(new DrawerItem(getString(R.string.menu_item4), R.drawable.ic_action_camera));
 
 		adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
 				dataList);
@@ -102,11 +103,7 @@ public class MainActivity extends ActionBarActivity {
 				fragment = new SettingsList();
 				break;
 			case 2:
-				fragment = new FragmentThree();
-				args.putString(FragmentThree.ITEM_NAME, dataList.get(possition)
-						.getItemName());
-				args.putInt(FragmentThree.IMAGE_RESOURCE_ID, dataList.get(possition)
-						.getImgResID());
+				fragment = new CalendarPicker();
 				break;
 			default:
 				break;
