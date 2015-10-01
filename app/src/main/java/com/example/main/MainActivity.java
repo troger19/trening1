@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -105,6 +106,9 @@ public class MainActivity extends ActionBarActivity {
 			case 2:
 				fragment = new CalendarPicker();
 				break;
+			case 3:
+				fragment = new Graphs();
+				break;
 			default:
 				break;
 		}
@@ -147,8 +151,20 @@ public class MainActivity extends ActionBarActivity {
 		if (mDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
+		switch (item.getItemId()) {   // Settings
+			case R.id.action_settings:
+				Toast.makeText(this, "Hurraaa!", Toast.LENGTH_SHORT).show();
+				Fragment fragment = new SettingsFragment1();
+				FragmentManager frgManager = getFragmentManager();
+				frgManager.beginTransaction().replace(R.id.content_frame, fragment)
+						.commit();
 
-		return false;
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+
+//		return false;
 	}
 
 	private class DrawerItemClickListener implements

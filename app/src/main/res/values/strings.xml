@@ -55,6 +55,11 @@
     <string name="training_text">Training</string>
     <string name="pause_text">Pause</string>
     <string name="series_text">Series</string>
+    <string name="training_days_list">trainingDaysList</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
 
 
 

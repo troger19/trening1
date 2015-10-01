@@ -3,7 +3,9 @@ package com.example.main;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
@@ -24,8 +26,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
@@ -265,9 +270,11 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
 
 
             if (roundCounter == 2) {
+                // Training is colompleted
                 textViewTotalTime.setText("Completed.");
                 textToSpeech.speak(done, TextToSpeech.QUEUE_FLUSH, null);
                 timer.cancel();
+                displaySaveTheDataDialog();
                 return;
             }
 
@@ -299,11 +306,6 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                     }
                 }
             }
-//            if (roundCounter == 0) {
-//                textViewTotalTime.setText("Completed.");
-//                textToSpeech.speak(done, TextToSpeech.QUEUE_FLUSH, null);
-//                timer.cancel();
-//            }
         }
 
         @Override
@@ -324,10 +326,37 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                 }else{
                     textToSpeech.speak(prepare, TextToSpeech.QUEUE_FLUSH, null);
                 }
-
             }
         }
     }
 
+
+    private void displaySaveTheDataDialog(){
+        final ArrayList<String> trainingDaysList;
+        trainingDaysList = (tinyDB.getListString(getString(R.string.training_days_list)) == null) ? new ArrayList<String>() : tinyDB.getListString(getString(R.string.training_days_list));
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
+        Date today = new Date();
+        String dateToSave = sdf.format(today);
+        trainingDaysList.add(dateToSave);
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CounterActivity.this);
+        alertDialogBuilder.setTitle("Save the Date?");
+        alertDialogBuilder
+                .setMessage("Would you like to save the training to the calendar?")
+                .setCancelable(false)
+                .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        tinyDB.putListString(getString(R.string.training_days_list), trainingDaysList);
+                        Toast.makeText(CounterActivity.this, "Training Saved", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
 
 }
