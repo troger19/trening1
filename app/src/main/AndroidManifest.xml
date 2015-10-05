@@ -45,6 +45,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.main.MainActivity" />
         </activity>
+        <activity
+            android:name=".MoviesActivity"
+            android:label="@string/title_activity_movies" >
+            <intent-filter>
+                <action android:name="displayMovies_filter" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

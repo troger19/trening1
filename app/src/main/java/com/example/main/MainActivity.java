@@ -49,7 +49,8 @@ public class MainActivity extends ActionBarActivity {
 		dataList.add(new DrawerItem(getString(R.string.menu_item1), R.drawable.ic_action_email));
 		dataList.add(new DrawerItem(getString(R.string.menu_item2), R.drawable.ic_action_good));
 		dataList.add(new DrawerItem(getString(R.string.menu_item3), R.drawable.ic_action_gamepad));
-		dataList.add(new DrawerItem(getString(R.string.menu_item4), R.drawable.ic_action_camera));
+		dataList.add(new DrawerItem(getString(R.string.menu_item4), R.drawable.ic_action_cloud));
+		dataList.add(new DrawerItem(getString(R.string.menu_item5), R.drawable.ic_action_camera));
 
 		adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
 				dataList);
@@ -108,6 +109,9 @@ public class MainActivity extends ActionBarActivity {
 				break;
 			case 3:
 				fragment = new Graphs();
+				break;
+			case 4:
+				fragment = new MoviesList();
 				break;
 			default:
 				break;
