@@ -2,6 +2,7 @@ package com.example.main;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
@@ -17,6 +18,7 @@ public class MoviesActivity extends Activity {
     private int position = 0;
     private ProgressDialog progressDialog;
     private MediaController mediaControls;
+    private int movieName;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -45,12 +47,20 @@ public class MoviesActivity extends Activity {
         // show the progress bar
         progressDialog.show();
 
+
+        Intent intent = getIntent();
+        // TODO vytihanut movie z listu
+        movieName = intent.getIntExtra(getString(R.string.selected_movie),0);
+
+
         try {
             //set the media controller in the VideoView
             myVideoView.setMediaController(mediaControls);
 
             //set the uri of the video to be played
-            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.workout1));
+//            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.workout1));
+//            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.abs_chect_mixed_workout2));
+            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + movieName));
 
         } catch (Exception e) {
             Log.e("Error", e.getMessage());

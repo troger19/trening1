@@ -28,16 +28,36 @@
     </string-array>
 
     <string-array name="movies_array">
-        <item>Training1</item>
-        <item>Training2</item>
-        <item>Training3</item>
-        <item>Training4</item>
-        <item>Training5</item>
-        <item>Training6</item>
+        <item>ABS_WORKOUT_1</item>
+        <item>ABS_WORKOUT_2</item>
+        <item>ABS_WORKOUT_3</item>
+        <item>ABS_WORKOUT_4</item>
+        <item>ABS_WORKOUT_5</item>
+        <item>ABS_WORKOUT_6</item>
+        <item>ABS_WORKOUT_7</item>
+        <item>ABS_WORKOUT_8</item>
+        <item>ABS_WORKOUT_9</item>
+        <item>ABS_WORKOUT_10</item>
+        <item>ABS_WORKOUT_11</item>
+        <item>ABS_WORKOUT_12</item>
+    </string-array>
+
+    <string-array name="movies_description_array">
+        <item>Abs_Workout1_Level1</item>
+        <item>Abs_Workout1_Level2</item>
+        <item>Abs_Workout1_Level3</item>
+        <item>Abs_Workout2_Hip_Hop</item>
+        <item>Abs_Workout3_Rock</item>
+        <item>Abs_Workout4_Brazil</item>
+        <item>Abs_Workout5_Insane_Special_Edition</item>
+        <item>Abs_Workout5_Insane_Workout_Round2</item>
+        <item>Abs_Chect_Mixed_Workout</item>
+        <item>Abs_Chest_Mixed_Workout2</item>
+        <item>six_pack_abs_workout</item>
+        <item>Women_4_minutes_abs_workout</item>
     </string-array>
 
     <string name="country_prompt">Choose an exercise</string>
-    one_arm.png
 
 
 
