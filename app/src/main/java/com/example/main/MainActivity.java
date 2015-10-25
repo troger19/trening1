@@ -158,7 +158,7 @@ public class MainActivity extends ActionBarActivity {
 		switch (item.getItemId()) {   // Settings
 			case R.id.action_settings:
 				Toast.makeText(this, "Hurraaa!", Toast.LENGTH_SHORT).show();
-				Fragment fragment = new SettingsFragment1();
+				Fragment fragment = new TrainingSettingsFragment();
 				FragmentManager frgManager = getFragmentManager();
 				frgManager.beginTransaction().replace(R.id.content_frame, fragment)
 						.commit();

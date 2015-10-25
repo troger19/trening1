@@ -26,7 +26,7 @@ public class MoviesList extends ListFragment {
     private String[] moviesList;
     private String[] moviesDescription;
 
-    // Array of integers points to images stored in /res/drawable/
+    // Array of all images in res/drawable
     int[] flags = new int[]{
             R.drawable.abs_chest_mixed_workout,
             R.drawable.abs_workout1_level2,
@@ -44,7 +44,7 @@ public class MoviesList extends ListFragment {
     };
 
 
-    // Array of integers points to images stored in /res/drawable/
+    // Array of all movies in res/raw
     int[] movies = new int[]{
             R.raw.abs_chest_mixed_workout,
             R.raw.abs_workout1_level2,
@@ -93,13 +93,9 @@ public class MoviesList extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         Intent intent = new Intent(getActivity(), MoviesActivity.class);
-        //TODO movie z listu,mozno ulozit zoznam do string resources
-        HashMap map = (HashMap) getListAdapter().getItem(position);
         int movieId = movies[position];
-//            int movieId = flags[(int)getListAdapter().getItem(position)];
         intent.putExtra(getString(R.string.selected_movie), movieId);
         startActivity(intent);
-
     }
 
 

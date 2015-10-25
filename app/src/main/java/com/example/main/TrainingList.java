@@ -19,12 +19,16 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.widget.Toast.LENGTH_LONG;
+import static android.widget.Toast.makeText;
+
 
 public class TrainingList extends ListFragment {
 
     private Resources res;
     private TinyDB tinyDB;
     private List<String> exercisesList = new ArrayList<>();
+    private List<Integer> activeTraining = new ArrayList<>();
 
     @Override
         public void onActivityCreated(Bundle savedInstanceState) {
@@ -43,6 +47,7 @@ public class TrainingList extends ListFragment {
                 exercisesList = tinyDB.getListString(text.getText().toString());
                 if (exercisesList.size() != 0) {
                     text.setTextColor(Color.GREEN);
+                    activeTraining.add(position);
                 }
                 return view;
             }
@@ -52,9 +57,12 @@ public class TrainingList extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        Intent intent = new Intent(getActivity(), CounterActivity.class);
-        intent.putExtra(getString(R.string.training_type),getListAdapter().getItem(position).toString());
-        startActivity(intent);
-
+        if (activeTraining.contains(position)){
+            Intent intent = new Intent(getActivity(), CounterActivity.class);
+            intent.putExtra(getString(R.string.training_type),getListAdapter().getItem(position).toString());
+            startActivity(intent);
+        }else{
+            makeText(getActivity(), "No exercises to load", LENGTH_LONG).show();
+        }
     }
 }

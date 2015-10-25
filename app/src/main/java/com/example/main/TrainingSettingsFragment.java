@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 
-public class SettingsFragment1 extends Fragment {
+public class TrainingSettingsFragment extends Fragment {
 
     private Button btnDeleteCalendar;
     private TinyDB tinyDB;
