@@ -49,7 +49,6 @@ public class MoviesActivity extends Activity {
 
 
         Intent intent = getIntent();
-        // TODO vytihanut movie z listu
         movieName = intent.getIntExtra(getString(R.string.selected_movie),0);
 
 
@@ -58,7 +57,6 @@ public class MoviesActivity extends Activity {
             myVideoView.setMediaController(mediaControls);
 
             //set the uri of the video to be played
-//            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.workout1));
 //            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.abs_chect_mixed_workout2));
             myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + movieName));
 

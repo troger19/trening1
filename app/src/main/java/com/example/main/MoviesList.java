@@ -43,6 +43,23 @@ public class MoviesList extends ListFragment {
 
     };
 
+
+    // Array of integers points to images stored in /res/drawable/
+    int[] movies = new int[]{
+            R.raw.abs_chest_mixed_workout,
+            R.raw.abs_workout1_level2,
+            R.raw.abs_workout1_level3,
+            R.raw.abs_workout2_hip_hop,
+            R.raw.abs_workout3_rock,
+            R.raw.abs_workout4_brazil,
+            R.raw.abs_workout5_insane_special_edition,
+            R.raw.abs_workout5_insane_workout_round2,
+            R.raw.abs_chest_mixed_workout,
+            R.raw.abs_chest_mixed_workout2,
+            R.raw.six_pack_abs_workout,
+            R.raw.women_4_minutes_abs_workout
+    };
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -78,7 +95,7 @@ public class MoviesList extends ListFragment {
         Intent intent = new Intent(getActivity(), MoviesActivity.class);
         //TODO movie z listu,mozno ulozit zoznam do string resources
         HashMap map = (HashMap) getListAdapter().getItem(position);
-        int movieId = Integer.parseInt((String) map.get("image"));
+        int movieId = movies[position];
 //            int movieId = flags[(int)getListAdapter().getItem(position)];
         intent.putExtra(getString(R.string.selected_movie), movieId);
         startActivity(intent);
