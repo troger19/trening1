@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
-import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.MediaController;
 import android.widget.VideoView;
@@ -18,7 +18,7 @@ public class MoviesActivity extends Activity {
     private int position = 0;
     private ProgressDialog progressDialog;
     private MediaController mediaControls;
-    private int movieName;
+    private String movieName;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class MoviesActivity extends Activity {
         // create a progress bar while the video file is loading
         progressDialog = new ProgressDialog(MoviesActivity.this);
         // set a title for the progress bar
-        progressDialog.setTitle("JavaCodeGeeks Android Video View Example");
+        progressDialog.setTitle("Trening Movie View");
         // set a message for the progress bar
         progressDialog.setMessage("Loading...");
         //set the progress bar not cancelable on users' touch
@@ -47,9 +47,8 @@ public class MoviesActivity extends Activity {
         // show the progress bar
         progressDialog.show();
 
-
         Intent intent = getIntent();
-        movieName = intent.getIntExtra(getString(R.string.selected_movie),0);
+        movieName = intent.getStringExtra(getString(R.string.selected_movie));
 
 
         try {
@@ -57,8 +56,7 @@ public class MoviesActivity extends Activity {
             myVideoView.setMediaController(mediaControls);
 
             //set the uri of the video to be played
-//            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.abs_chect_mixed_workout2));
-            myVideoView.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/" + movieName));
+            myVideoView.setVideoPath(Environment.getExternalStorageDirectory() + "/Trening/Movies/" + movieName + ".wmv");
 
         } catch (Exception e) {
             Log.e("Error", e.getMessage());

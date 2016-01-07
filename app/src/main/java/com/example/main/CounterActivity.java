@@ -270,7 +270,7 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
 
 
             if (roundCounter == 2) {
-                // Training is colompleted
+                // Training is completed
                 textViewTotalTime.setText("Completed.");
                 textToSpeech.speak(done, TextToSpeech.QUEUE_FLUSH, null);
                 timer.cancel();
@@ -290,6 +290,8 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                     textToSpeech.speak(stop, TextToSpeech.QUEUE_FLUSH, null);
                     Log.i("pauseTime ", String.valueOf(pauseTime));
                     switcherTrainingPause = !switcherTrainingPause;
+                    int seriesLeft = Integer.parseInt(editTextSeries.getText().toString())-1;
+                    editTextSeries.setText(String.valueOf(seriesLeft));
                     timer.start();
                 }
                 roundCounter--;
