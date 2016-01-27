@@ -299,6 +299,7 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                     exerciseCounter =  (exerciseCounter < exercisesList.size()-1) ? exerciseCounter+1 : exerciseCounter; // not overflow the index
                     exerciseName = Util.getNormalExerciseName(exercisesList.get(exerciseCounter));
                     textExercise.setText(exerciseName);  // change text
+                    editTextSeries.setText(String.valueOf(series)); // reset the series
                     int imageResource = getResources().getIdentifier("drawable/" + exercisesList.get(exerciseCounter), null, getPackageName());
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageResource);
                     imageExercise.setImageBitmap(bitmap);
