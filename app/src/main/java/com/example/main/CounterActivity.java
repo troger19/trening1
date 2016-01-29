@@ -270,7 +270,7 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
 
 
             if (roundCounter == 2) {
-                // Training is colompleted
+                // Training is completed
                 textViewTotalTime.setText("Completed.");
                 textToSpeech.speak(done, TextToSpeech.QUEUE_FLUSH, null);
                 timer.cancel();
@@ -290,6 +290,8 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                     textToSpeech.speak(stop, TextToSpeech.QUEUE_FLUSH, null);
                     Log.i("pauseTime ", String.valueOf(pauseTime));
                     switcherTrainingPause = !switcherTrainingPause;
+                    int seriesLeft = Integer.parseInt(editTextSeries.getText().toString())-1;
+                    editTextSeries.setText(String.valueOf(seriesLeft));
                     timer.start();
                 }
                 roundCounter--;
@@ -297,6 +299,7 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
                     exerciseCounter =  (exerciseCounter < exercisesList.size()-1) ? exerciseCounter+1 : exerciseCounter; // not overflow the index
                     exerciseName = Util.getNormalExerciseName(exercisesList.get(exerciseCounter));
                     textExercise.setText(exerciseName);  // change text
+                    editTextSeries.setText(String.valueOf(series)); // reset the series
                     int imageResource = getResources().getIdentifier("drawable/" + exercisesList.get(exerciseCounter), null, getPackageName());
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageResource);
                     imageExercise.setImageBitmap(bitmap);

@@ -64,17 +64,26 @@
 
     <string-array name="exercises_arrays">
         <item>push_up</item>
+        <item>close_push_up</item>
         <item>diamond_push_up</item>
         <item>one_arm_ball_push_up</item>
         <item>wide_push_up</item>
         <item>side_side_push_up</item>
         <item>spiderman_push_up</item>
+        <item>decline_push_up</item>
+        <item>raised_leg_push_up</item>
+        <item>staggered_push_up</item>
         <item>elevated_one_legged_push_up</item>
         <item>clapping_push_up</item>
+        <item>planche_push_up</item>
         <item>push_up_rotate</item>
         <item>one_legged_knee_push_up</item>
         <item>one_arm_knee_push_up</item>
         <item>one_arm_push_up</item>
+        <item>russian_push_up</item>
+        <item>tuck_planche</item>
+        <item>archer_push_up</item>
+        <item>l_sit</item>
     </string-array>
 
 
