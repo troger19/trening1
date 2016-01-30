@@ -26,27 +26,27 @@ public class ExerciseList extends ListFragment {
 
     // Array of all images in res/drawable
     int[] exerciseArray = new int[]{
-//            R.drawable.archer_push_up_small,
-//            R.drawable.clapping_push_up_small,
-//            R.drawable.close_push_up_small,
-//            R.drawable.decline_push_up_small,
-//            R.drawable.diamond_push_up_small,
-//            R.drawable.elevated_one_legged_push_up_small,
-//            R.drawable.l_sit_small,
-//            R.drawable.one_arm_ball_push_up_small,
-//            R.drawable.one_arm_knee_push_up_small,
-//            R.drawable.one_arm_push_up_small,
-//            R.drawable.one_legged_knee_push_up_small,
-//            R.drawable.planche_push_up_small,
-//            R.drawable.push_up_rotate_small,
-//            R.drawable.push_up_small,
-//            R.drawable.raised_leg_push_up_small,
-//            R.drawable.russian_push_up_small,
-//            R.drawable.side_side_push_up_small,
-//            R.drawable.spiderman_push_up_small,
-//            R.drawable.staggered_push_up_small,
-//            R.drawable.tuck_planche_small,
-//            R.drawable.wide_push_up_small,
+            R.drawable.archer_push_up_small,
+            R.drawable.clapping_push_up_small,
+            R.drawable.close_push_up_small,
+            R.drawable.decline_push_up_small,
+            R.drawable.diamond_push_up_small,
+            R.drawable.elevated_one_legged_push_up_small,
+            R.drawable.l_sit_small,
+            R.drawable.one_arm_ball_push_up_small,
+            R.drawable.one_arm_knee_push_up_small,
+            R.drawable.one_arm_push_up_small,
+            R.drawable.one_legged_knee_push_up_small,
+            R.drawable.planche_push_up_small,
+            R.drawable.push_up_rotate_small,
+            R.drawable.push_up_small,
+            R.drawable.raised_leg_push_up_small,
+            R.drawable.russian_push_up_small,
+            R.drawable.side_side_push_up_small,
+            R.drawable.spiderman_push_up_small,
+            R.drawable.staggered_push_up_small,
+            R.drawable.tuck_planche_small,
+            R.drawable.wide_push_up_small
     };
 
 
@@ -59,7 +59,7 @@ public class ExerciseList extends ListFragment {
 
         for (int i = 0; i < exerciseArray.length; i++) {
             HashMap<String, String> hm = new HashMap<>();
-            hm.put("exerciseTitle", String.valueOf(i));
+            hm.put("exerciseTitle", exerciseList[i]);
             hm.put("image", Integer.toString(exerciseArray[i]));
             aList.add(hm);
         }
