@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.jano.trening"
-        minSdkVersion 8
+        minSdkVersion 16
         targetSdkVersion 21
     }
 
@@ -28,4 +28,12 @@ dependencies {
     compile 'com.squareup:android-times-square:1.6.4'
     compile 'com.android.support:support-v4:22.2.1'
     compile 'com.github.PhilJay:MPAndroidChart:v2.0.9' // dependency for charts
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.github.woxthebox:draglistview:1.1.9'
 }

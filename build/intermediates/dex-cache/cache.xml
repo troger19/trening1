@@ -2,46 +2,60 @@
 <items version="2" >
 
     <item
-        jar="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-dac83d8b4ef3d3fb4dbbef70baf358ee97b61f6e.jar" />
-    </item>
-    <item
-        jar="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\pre-dexed\debug\classes-52130f312d12456e6cf6565a058da8c1ca21bba7.jar" />
-    </item>
-    <item
-        jar="C:\Users\jan.babel\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-814fdda8e0ad9c50caffa3a0598c216d247e2b59.jar" />
-    </item>
-    <item
-        jar="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\exploded-aar\com.squareup\android-times-square\1.6.4\jars\classes.jar"
+        jar="C:\Java\Android\trening2\app\build\intermediates\exploded-aar\com.squareup\android-times-square\1.6.4\jars\classes.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="b556ad328d970ba09148ffe5e874bcbd77bf56a6">
-        <dex dex="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\pre-dexed\debug\classes-7c69b64ce39682e42216cfb3cc23798c111b4d22.jar" />
+        <dex dex="C:\Java\Android\trening2\app\build\intermediates\pre-dexed\debug\classes-68af340512e7d9385b4dfc2a527ce09714c769be.jar" />
     </item>
     <item
-        jar="C:\Users\jan.babel\.gradle\caches\modules-2\files-2.1\com.github.PhilJay\MPAndroidChart\v2.0.9\4244e2998018aa492389e8e30a77b7987959608e\MPAndroidChart-v2.0.9.jar"
+        jar="C:\Java\Android\trening2\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="09c5e804bc67fc0580360043dff067df574a60d4">
+        <dex dex="C:\Java\Android\trening2\app\build\intermediates\pre-dexed\debug\classes-d1cb2cfdfb3d8fca6f5fde1b835804013928d598.jar" />
+    </item>
+    <item
+        jar="C:\Users\Kaktus\AppData\Local\Android\sdk1\extras\android\m2repository\com\android\support\support-annotations\23.1.1\support-annotations-23.1.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="8d680ba5a623724d1fb0e81c36a790f023a6cede">
+        <dex dex="C:\Java\Android\trening2\app\build\intermediates\pre-dexed\debug\support-annotations-23.1.1-03219056ec3ef9b3075b9cf3ae33d23c438439e7.jar" />
+    </item>
+    <item
+        jar="C:\Java\Android\trening2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="6cbc7773921fcfedbe55657578f0cbfe614778dc">
+        <dex dex="C:\Java\Android\trening2\app\build\intermediates\pre-dexed\debug\classes-c3dfb282a847bbd907b727abef76cea38f3b5519.jar" />
+    </item>
+    <item
+        jar="C:\Java\Android\trening2\app\build\intermediates\exploded-aar\com.github.woxthebox\draglistview\1.1.9\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="620166a46cae3a55968d1f26390fde70f282444d">
+        <dex dex="C:\Java\Android\trening2\app\build\intermediates\pre-dexed\debug\classes-a8b625055ad5ca6caf7f2efa552e30ed7e8f48d1.jar" />
+    </item>
+    <item
+        jar="C:\Users\Kaktus\.gradle\caches\modules-2\files-2.1\com.github.PhilJay\MPAndroidChart\v2.0.9\4244e2998018aa492389e8e30a77b7987959608e\MPAndroidChart-v2.0.9.jar"
         jumboMode="false"
         revision="22.0.1"
         sha1="4244e2998018aa492389e8e30a77b7987959608e">
-        <dex dex="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\pre-dexed\debug\MPAndroidChart-v2.0.9-e8f45b9a62e8f8390960ab260ade0ef2c0cc511e.jar" />
+        <dex dex="C:\Java\Android\trening2\app\build\intermediates\pre-dexed\debug\MPAndroidChart-v2.0.9-75a4b2cf2087477e2c83af63528042073375386d.jar" />
     </item>
     <item
-        jar="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jar="C:\Java\Android\trening2\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.1.1\jars\libs\internal_impl-23.1.1.jar"
         jumboMode="false"
         revision="22.0.1"
-        sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="C:\Java\AndroidStudioProjects\trening1\app\build\intermediates\pre-dexed\debug\classes-0c96cb00f94c0f437dfe74e2c1a936fe3e44660b.jar" />
+        sha1="a4de9c81ae239414e1ed0f86441b02abaf29bca9">
+        <dex dex="C:\Java\Android\trening2\app\build\intermediates\pre-dexed\debug\internal_impl-23.1.1-83111929e3a2307dff6b98941a973c8370616591.jar" />
+    </item>
+    <item
+        jar="C:\Java\Android\trening2\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\Java\Android\trening2\app\build\intermediates\pre-dexed\debug\classes-f50346f3345704086d5b50969085defb023cf6a7.jar" />
     </item>
 
 </items>

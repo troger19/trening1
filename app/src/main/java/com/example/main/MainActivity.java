@@ -51,6 +51,7 @@ public class MainActivity extends ActionBarActivity {
 		dataList.add(new DrawerItem(getString(R.string.menu_item3), R.drawable.ic_action_gamepad));
 		dataList.add(new DrawerItem(getString(R.string.menu_item4), R.drawable.ic_action_cloud));
 		dataList.add(new DrawerItem(getString(R.string.menu_item5), R.drawable.ic_action_camera));
+		dataList.add(new DrawerItem("hocooo", R.drawable.ic_action_camera));
 
 		adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
 				dataList);
@@ -112,6 +113,9 @@ public class MainActivity extends ActionBarActivity {
 				break;
 			case 4:
 				fragment = new MoviesList();
+				break;
+			case 5:
+				fragment = new ExerciseList();
 				break;
 			default:
 				break;

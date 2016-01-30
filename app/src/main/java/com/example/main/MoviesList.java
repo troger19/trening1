@@ -64,11 +64,11 @@ public class MoviesList extends ListFragment {
         // Keys used in Hashmap
         String[] from = {"image", "movie", "desc"};
 
-        // Ids of views in listview_layout
+        // Ids of views in movies_list
         int[] to = {R.id.image, R.id.title, R.id.description};
 
         // Instantiating an adapter to store each items
-        SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(), aList, R.layout.listview_layout, from, to);
+        SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(), aList, R.layout.movies_list, from, to);
         setListAdapter(adapter);
 
         return super.onCreateView(inflater, container, savedInstanceState);
