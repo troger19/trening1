@@ -19,7 +19,7 @@
  *  and unicode 2017 that are used for separating the items in a list.
  */
 
-package com.example.main;
+package com.example.main.util;
 
 import android.content.Context;
 import android.content.SharedPreferences;

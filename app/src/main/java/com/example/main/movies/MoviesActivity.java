@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.main.movies;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -11,6 +11,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.widget.MediaController;
 import android.widget.VideoView;
+
+import com.example.main.R;
 
 public class MoviesActivity extends Activity {
 

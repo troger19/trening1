@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.main.configuration;
 
 /**
  * Created by jan.babel on 18/08/2015.
@@ -19,11 +19,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.main.R;
+import com.example.main.util.TinyDB;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class SettingsList extends ListFragment {
+public class TrainingConfiguration extends ListFragment {
 
     private Resources res;
     private TinyDB tinyDB;
@@ -79,7 +82,7 @@ public class SettingsList extends ListFragment {
                             tinyDB.remove(trainingType + getString(R.string.training_time));
                             tinyDB.remove(trainingType + getString(R.string.pause_time));
                             tinyDB.remove(trainingType + getString(R.string.series));
-                            Toast.makeText(getActivity(),"Training was deleted",Toast.LENGTH_LONG).show();
+                            Toast.makeText(getActivity(), "Training was deleted", Toast.LENGTH_LONG).show();
                             dialog.cancel();
                         }
                     })

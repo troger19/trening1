@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.main.util;
 
 /**
  * Created by jan.babel on 18/08/2015.
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.main.R;
 
 import java.util.List;
 

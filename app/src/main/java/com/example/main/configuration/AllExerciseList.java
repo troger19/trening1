@@ -1,25 +1,26 @@
-package com.example.main;
+package com.example.main.configuration;
 
 /**
  * Created by jan.babel on 18/08/2015.
  */
 
 
-import android.app.ListFragment;
+import android.app.Activity;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.example.main.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 
-public class ExerciseList extends ListFragment {
+public class AllExerciseList extends Activity {
     //
     private Resources res;
     private String[] exerciseList;
@@ -51,7 +52,11 @@ public class ExerciseList extends ListFragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.training_configuration_new);
+
         res = getResources();
         exerciseList = res.getStringArray(R.array.exercise_array);
         // Each row in the list stores exercise name, description and image
@@ -71,19 +76,19 @@ public class ExerciseList extends ListFragment {
         int[] to = {R.id.exerciseTitle, R.id.exerciseImage};
 
         // Instantiating an adapter to store each items
-        SimpleAdapter adapter = new SimpleAdapter(getActivity().getBaseContext(), aList, R.layout.exercise_list, from, to);
-        setListAdapter(adapter);
+        SimpleAdapter adapter = new SimpleAdapter(this, aList, R.layout.exercise_list, from, to);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
+        ListView myList = (ListView) findViewById(R.id.listView);
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-//        Intent intent = new Intent(getActivity(), MoviesActivity.class);
-//        String movieName = moviesDescription[position];
-//        intent.putExtra(getString(R.string.selected_movie), movieName);
-//        startActivity(intent);
-        System.out.println("kuuruvaaa");
+        myList.setAdapter(adapter);
+
+        myList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.println("kuuruvaaa11");
+            }
+        });
+
     }
 
 

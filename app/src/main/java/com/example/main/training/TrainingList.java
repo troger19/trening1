@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.main.training;
 
 /**
  * Created by jan.babel on 18/08/2015.
@@ -15,6 +15,9 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.main.R;
+import com.example.main.util.TinyDB;
 
 import java.util.ArrayList;
 import java.util.List;

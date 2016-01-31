@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.main.training;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -27,6 +27,10 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.main.R;
+import com.example.main.util.TinyDB;
+import com.example.main.util.Util;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

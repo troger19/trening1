@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.main.calendar;
 
 /**
  * Created by jan.babel on 18/08/2015.
@@ -11,6 +11,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.main.R;
+import com.example.main.util.TinyDB;
 import com.squareup.timessquare.CalendarPickerView;
 
 import java.text.ParseException;

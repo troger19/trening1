@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.main.settings;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import com.example.main.R;
+import com.example.main.util.TinyDB;
 
 
 public class TrainingSettingsFragment extends Fragment {

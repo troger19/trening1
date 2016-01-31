@@ -15,6 +15,16 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.main.calendar.CalendarPicker;
+import com.example.main.configuration.TrainingConfiguration;
+import com.example.main.configuration.TrainingConfigurationNew;
+import com.example.main.graphs.Graphs;
+import com.example.main.movies.MoviesList;
+import com.example.main.settings.TrainingSettingsFragment;
+import com.example.main.training.TrainingList;
+import com.example.main.util.CustomDrawerAdapter;
+import com.example.main.util.DrawerItem;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
 		dataList.add(new DrawerItem(getString(R.string.menu_item3), R.drawable.ic_action_gamepad));
 		dataList.add(new DrawerItem(getString(R.string.menu_item4), R.drawable.ic_action_cloud));
 		dataList.add(new DrawerItem(getString(R.string.menu_item5), R.drawable.ic_action_camera));
-		dataList.add(new DrawerItem("hocooo", R.drawable.ic_action_camera));
+		dataList.add(new DrawerItem(getString(R.string.menu_item6), R.drawable.ic_action_camera));
 
 		adapter = new CustomDrawerAdapter(this, R.layout.custom_drawer_item,
 				dataList);
@@ -103,7 +113,7 @@ public class MainActivity extends ActionBarActivity {
 				fragment = new TrainingList();
 				break;
 			case 1:
-				fragment = new SettingsList();
+				fragment = new TrainingConfiguration();
 				break;
 			case 2:
 				fragment = new CalendarPicker();
@@ -115,7 +125,7 @@ public class MainActivity extends ActionBarActivity {
 				fragment = new MoviesList();
 				break;
 			case 5:
-				fragment = new ExerciseList();
+				fragment = new TrainingConfigurationNew();
 				break;
 			default:
 				break;

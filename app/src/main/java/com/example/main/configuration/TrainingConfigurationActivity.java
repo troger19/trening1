@@ -1,4 +1,4 @@
-package com.example.main;
+package com.example.main.configuration;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.main.R;
+import com.example.main.util.TinyDB;
 
 import java.util.ArrayList;
 
