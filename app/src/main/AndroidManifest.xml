@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="16"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -29,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CounterActivity"
+            android:name=".training.CounterActivity"
             android:label="@string/title_activity_counter" >
             <intent-filter>
                 <action android:name="displayCounter_filter" />
@@ -38,15 +38,31 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".TrainingConfigurationActivity"
+            android:name=".configuration.TrainingConfigurationActivity"
             android:label="@string/title_activity_training_configuration"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".configuration.TrainingConfigurationActivityNew"
+            android:label="@string/title_training_configuration"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".configuration.AllExerciseList"
+            android:label="ExerciseListActivity"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.main.MainActivity" />
         </activity>
         <activity
-            android:name=".MoviesActivity"
+            android:name=".movies.MoviesActivity"
             android:label="@string/title_activity_movies" >
             <intent-filter>
                 <action android:name="displayMovies_filter" />
