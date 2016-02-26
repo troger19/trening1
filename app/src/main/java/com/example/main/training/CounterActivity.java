@@ -24,7 +24,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,9 +44,8 @@ import java.util.concurrent.TimeUnit;
 public class CounterActivity extends Activity implements TextToSpeech.OnInitListener{
 
     private Button btnStart, btnStop;
-    private SeekBar seekBarTraining, seekBarPause;
-    private TextView textViewTotalTime, textViewTraining, textViewPause, textExercise;
-    EditText editTextSeries;
+    private TextView textViewTotalTime, textExercise;
+    EditText editTextTrainingTime, editTextPauseTime, editTextSeries;
     private SoundPool sounds;
     private int sndtick;
     MediaPlayer mediaPlayer = null;
@@ -92,12 +90,10 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
         btnStop = (Button) findViewById(R.id.btnStop);
         textViewTotalTime = (TextView) findViewById(R.id.textViewTotalTime);
         textExercise = (TextView) findViewById(R.id.textExercise);
-        textViewTraining = (TextView) findViewById(R.id.textViewTraining);
-        textViewPause = (TextView) findViewById(R.id.textViewPause);
         sounds = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
         sndtick = sounds.load(this, R.raw.ticks10s, 1);
-        seekBarTraining = (SeekBar) findViewById(R.id.seekBarTraining);
-        seekBarPause = (SeekBar) findViewById(R.id.seekBarPause);
+        editTextTrainingTime = (EditText) findViewById(R.id.editTextTrainingTime);
+        editTextPauseTime = (EditText) findViewById(R.id.editTextPauseTime);
         editTextSeries = (EditText) findViewById(R.id.editTextSeries);
         Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         imageExercise = (ImageView) findViewById(R.id.imageExercise);
@@ -111,12 +107,12 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
             @Override
             public void onClick(View v) {
                 //total training time = (Training + pause) * series
-                totalTrainingTime = (Integer.parseInt(textViewTraining.getText().toString()) + Integer.parseInt(textViewPause.getText().toString()))
+                totalTrainingTime = (Integer.parseInt(editTextTrainingTime.getText().toString()) + Integer.parseInt(editTextPauseTime.getText().toString()))
                         * Integer.parseInt(editTextSeries.getText().toString()) * exercisesList.size() ;
-                seriesTime = Integer.parseInt(textViewTraining.getText().toString());
-                pauseTime = Integer.parseInt(textViewPause.getText().toString());
-                textViewTotalTime.setText(textViewTraining.getText());
-                textViewPause.setText(String.valueOf(seekBarPause.getProgress()));
+                seriesTime = Integer.parseInt(editTextTrainingTime.getText().toString());
+                pauseTime = Integer.parseInt(editTextPauseTime.getText().toString());
+                textViewTotalTime.setText(editTextTrainingTime.getText());
+//                editTextPauseTime.setText(String.valueOf(seekBarPause.getProgress()));
                 series = Integer.parseInt(editTextSeries.getText().toString());
                 roundCounter = series * 2 * exercisesList.size();
 
@@ -159,39 +155,7 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
             }
         });
 
-        seekBarPause.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewPause.setText(String.valueOf(progress));
-            }
 
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-
-        seekBarTraining.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                textViewTraining.setText(String.valueOf(progress));
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
     }
 
 
@@ -245,10 +209,8 @@ public class CounterActivity extends Activity implements TextToSpeech.OnInitList
     private void loadValues() {
         String seriesTime =tinyDB.getString(trainingType + getString(R.string.training_time));
         String pauseTime = tinyDB.getString(trainingType + getString(R.string.pause_time));
-        seekBarTraining.setProgress(Integer.valueOf(seriesTime));
-        seekBarPause.setProgress(Integer.valueOf(pauseTime));
-        textViewTraining.setText(seriesTime);
-        textViewPause.setText(pauseTime);
+        editTextTrainingTime.setText(seriesTime);
+        editTextPauseTime.setText(pauseTime);
         editTextSeries.setText(tinyDB.getString(trainingType + getString(R.string.series)));
 
     }

@@ -16,26 +16,12 @@
             android:text="Training"
             android:id="@+id/textView3" />
 
-        <SeekBar
-            android:layout_width="268dp"
+        <EditText
+            android:layout_width="121dp"
             android:layout_height="wrap_content"
-            android:id="@+id/seekBarTraining"
-            android:max="120" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/textViewTraining"
-            android:layout_weight="0.49" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="82dp"
-        android:weightSum="1">
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextTrainingTime" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -43,18 +29,12 @@
             android:text="Pause"
             android:id="@+id/textView4" />
 
-        <SeekBar
-            android:layout_width="279dp"
+        <EditText
+            android:layout_width="121dp"
             android:layout_height="wrap_content"
-            android:id="@+id/seekBarPause"
-            android:max="60" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:id="@+id/textViewPause"
-            android:layout_weight="0.54" />
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editTextPauseTime" />
 
     </LinearLayout>
 
